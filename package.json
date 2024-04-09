@@ -1,0 +1,11 @@
+{
+  "name": "evm-mechanics",
+  "version": "1.0.0",
+  "description": "Busy wait calculating primes",
+  "scripts": {
+    "compile": "solc --optimize --abi --bin EVMMechanics.sol -o build/"
+  },
+  "dependencies": {
+    "solc": "^0.8.0"
+  }
+}
