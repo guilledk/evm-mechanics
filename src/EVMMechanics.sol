@@ -1,10 +1,13 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.5.16;
+pragma solidity ^0.8.0;
 
 contract EVMMechanics {
+    // Event to print prime numbers is now removed since we're returning the last prime instead
+    // event PrimeNumber(uint256 prime);
+
     address public owner;
 
-    constructor() public {
+    constructor() {
         owner = msg.sender;
     }
 
@@ -12,9 +15,10 @@ contract EVMMechanics {
     // Modified to return the last prime number generated
     function roEvm(uint256 primeMax) public returns (uint256) {
         require(msg.sender == owner, "Unauthorized");
+
         uint256 lastPrime = 0; // Variable to hold the last prime number found
 
-        for (uint256 p = 2; p <= primeMax; p++) {
+        for (uint256 p = 2; p <= primeMax; p += 1) {
             if (isPrime(p) && isMersennePrime(p)) {
                 lastPrime = p; // Update lastPrime with the current prime
             }
@@ -37,7 +41,6 @@ contract EVMMechanics {
                 return false;
             }
         }
-
         return true;
     }
 
@@ -45,7 +48,6 @@ contract EVMMechanics {
     function sqrt(uint256 x) private pure returns (uint256 y) {
         uint256 z = (x + 1) / 2;
         y = x;
-
         while (z < y) {
             y = z;
             z = (x / z + z) / 2;
@@ -56,13 +58,11 @@ contract EVMMechanics {
     function isMersennePrime(uint256 p) private pure returns (bool) {
         if (p == 2) return true;
 
-        uint256 mP = (2 ** p) - 1;
+        uint256 mP = (2**p) - 1;
         uint256 s = 4;
-
         for (uint256 i = 3; i <= p; i++) {
             s = (s * s - 2) % mP;
         }
-
         return (s == 0);
     }
 }

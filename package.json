@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "Busy wait calculating primes",
   "scripts": {
-    "compile": "solc --combined-json abi,bin,bin-runtime,srcmap,srcmap-runtime,ast EVMMechanics.sol > EVMMechanics.json"
+    "compile": "npx waffle"
   },
-  "dependencies": {
-    "solc": "^0.8.0"
+  "dependencies": {},
+  "devDependencies": {
+    "solc": "^0.8.0",
+    "ethers": "^6.11.1",
+    "ethereum-waffle": "^4.0.10"
   }
 }
